@@ -5,11 +5,9 @@ mod app;
 mod default;
 mod sim;
 
-
 // When compiling natively:
 #[cfg(not(target_arch = "wasm32"))]
 fn main() -> eframe::Result<()> {
-
     env_logger::init(); // Log to stderr (if you run with `RUST_LOG=debug`).
 
     let native_options = eframe::NativeOptions {
@@ -19,7 +17,7 @@ fn main() -> eframe::Result<()> {
     eframe::run_native(
         "PID Ball",
         native_options,
-        Box::new(|_cc| Box::new(pid_ball::MyApp::default())),
+        Box::new(|_cc| Box::<app::MyApp>::default()),
     )
 }
 

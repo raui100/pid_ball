@@ -137,6 +137,7 @@ impl Input {
     }
 }
 
+#[derive(Default)]
 pub struct MyApp {
     input: Input,
     sim: Simulation,
@@ -146,21 +147,6 @@ pub struct MyApp {
     force: Vec<f32>,
     seconds: Vec<f32>,
     time: Time,
-}
-
-impl Default for MyApp {
-    fn default() -> Self {
-        Self {
-            input: Default::default(),
-            sim: Default::default(),
-            pos: Default::default(),
-            vel: Default::default(),
-            target: Default::default(),
-            time: Default::default(),
-            force: Default::default(),
-            seconds: Default::default(),
-        }
-    }
 }
 
 impl MyApp {
@@ -175,14 +161,14 @@ impl MyApp {
     /// Restarts everything and discards user input
     fn reset(&mut self) {
         self.clear();
-        self.sim.config(Message::Restart);  // restart simulation
+        self.sim.config(Message::Restart); // restart simulation
         self.time = Default::default();
         self.input = Default::default();
     }
     /// Restarts everything but keeps user input
     fn restart(&mut self) {
         self.clear();
-        self.sim.config(Message::Reset);  // resets simulation
+        self.sim.config(Message::Reset); // resets simulation
         self.time = Default::default();
     }
 }
@@ -210,10 +196,18 @@ impl eframe::App for MyApp {
 
         egui::TopBottomPanel::top("config1").show(ctx, |ui| {
             ui.horizontal(|ui| {
-                if ui.button("Reset").on_hover_text("Clears plots and resets with default values").clicked() {
+                if ui
+                    .button("Reset")
+                    .on_hover_text("Clears plots and resets with default values")
+                    .clicked()
+                {
                     self.reset()
                 }
-                if ui.button("Restart").on_hover_text("Clears plots and resets with given values").clicked() {
+                if ui
+                    .button("Restart")
+                    .on_hover_text("Clears plots and resets with given values")
+                    .clicked()
+                {
                     self.restart();
                 }
                 ui.separator();
@@ -246,7 +240,7 @@ impl eframe::App for MyApp {
                 ui.separator();
                 ui.label("D");
                 ui.add(DragValue::new(self.input.kd.get_mut()).speed(0.1));
-                
+
                 // Link to egui
                 ui.separator();
                 ui.hyperlink_to("Source", "https://github.com/raui100/pid_ball");
@@ -257,13 +251,19 @@ impl eframe::App for MyApp {
             ui.horizontal(|ui| {
                 // Hold/Drop ball
                 if self.input.hold_ball.get() {
-                    if ui.button("Drop").on_hover_text("Holds the ball still").clicked() {
+                    if ui
+                        .button("Drop")
+                        .on_hover_text("Holds the ball still")
+                        .clicked()
+                    {
                         self.input.hold_ball.val = false;
                     }
-                } else {
-                    if ui.button("Hold").on_hover_text("Free floating ball").clicked() {
-                        self.input.hold_ball.val = true;
-                    }
+                } else if ui
+                    .button("Hold")
+                    .on_hover_text("Free floating ball")
+                    .clicked()
+                {
+                    self.input.hold_ball.val = true;
                 }
                 ui.separator();
 
@@ -272,7 +272,7 @@ impl eframe::App for MyApp {
                     .on_hover_text("Use '-9.81' for earth-like gravitation");
                 ui.add(DragValue::new(self.input.gravitation.get_mut()).speed(0.1));
                 ui.separator();
-                
+
                 // Max force
                 ui.label("Max. force [N]")
                     .on_hover_text("The ball weighs 1 Kg");
@@ -297,7 +297,7 @@ impl eframe::App for MyApp {
         // Painting the ball
         let y_width = ctx.available_rect().width();
         egui::SidePanel::left("ball")
-            .default_width(y_width * 0.2)  // Gives 20% of the space to the animation
+            .default_width(y_width * 0.2) // Gives 20% of the space to the animation
             .show(ctx, |ui| {
                 if let Some(&pos) = self.pos.last() {
                     let Vec2 { x, y } = ui.available_size();
