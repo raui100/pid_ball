@@ -1,23 +1,18 @@
 [package]
-name = "eframe_template"
+name = "pid_ball"
 version = "0.1.0"
-authors = ["Emil Ernerfeldt <emil.ernerfeldt@gmail.com>"]
+authors = ["Raui Ghazaleh <rj.ghazaleh@gmail.com>"]
 edition = "2021"
 rust-version = "1.71"
 
-
 [dependencies]
 egui = "0.23.0"
-eframe = { version = "0.23.0", default-features = false, features = [
-    "accesskit",     # Make egui comptaible with screen readers. NOTE: adds a lot of dependencies.
-    "default_fonts", # Embed the default egui fonts.
-    "glow",          # Use the glow rendering backend. Alternative: "wgpu".
-    "persistence",   # Enable restoring app state when restarting the app.
-] }
+eframe = "0.23.0"
 log = "0.4"
-
-# You only need serde if you want app persistence:
-serde = { version = "1", features = ["derive"] }
+web-time = "0.2.2"
+egui_plot = "0.23.0"
+rand = "0.8.5"
+rand_distr = "0.4.3"
 
 # native:
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
@@ -26,7 +21,7 @@ env_logger = "0.10"
 # web:
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen-futures = "0.4"
-
+getrandom = { version = "0.2", features = ["js"] }
 
 [profile.release]
 opt-level = 2 # fast and small wasm
@@ -34,14 +29,3 @@ opt-level = 2 # fast and small wasm
 # Optimize all dependencies even in debug builds:
 [profile.dev.package."*"]
 opt-level = 2
-
-
-[patch.crates-io]
-
-# If you want to use the bleeding edge version of egui and eframe:
-# egui = { git = "https://github.com/emilk/egui", branch = "master" }
-# eframe = { git = "https://github.com/emilk/egui", branch = "master" }
-
-# If you fork https://github.com/emilk/egui you can test with:
-# egui = { path = "../egui/crates/egui" }
-# eframe = { path = "../egui/crates/eframe" }

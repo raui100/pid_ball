@@ -1,0 +1,13 @@
+pub const GRAVITATION: f32 = -9.81; // m/s^2
+pub const KP: f32 = 150.0;
+pub const KI: f32 = 1.0;
+pub const KD: f32 = 20.0;
+pub const TARGET: f32 = 0.6;
+pub const SAMPLING_RATE: u32 = 100;
+pub const NOISE: f32 = 0.001;
+pub const BALL_POS: f32 = 0.5;
+pub const BALL_VEL: f32 = 0.0;
+pub const IND_POS: f32 = 1.0;
+pub const MAX_FORCE: f32 = 50.0;
+pub const MAX_FORCE_RATE: f32 = 200.0;
+pub const HOLD_BALL: bool = false;
