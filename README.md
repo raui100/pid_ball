@@ -1,5 +1,5 @@
 # PID Ball
-Proportional–integral–derivative controller for a little floating ball. Build with [egui](https://github.com/emilk/egui/). Can be compiled to WASM or native executable. You can try the WASM version online or check [this](https://github.com/emilk/eframe_template/#testing-locally) for compilation instructions.  
+Proportional–integral–derivative controller for a little floating ball. Build with [egui](https://github.com/emilk/egui/). Can be compiled to WASM or native executable. You can [try](https://raui100.github.io/pid_ball/) the WASM version online or check [this](https://github.com/emilk/eframe_template/#testing-locally) for compilation instructions.  
 ![screenshot of the GUI](./assets/pid_ball_screenshot.png)
 
 # About
