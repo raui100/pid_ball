@@ -7,7 +7,7 @@ rust-version = "1.71"
 
 [dependencies]
 egui = "0.23.0"
-eframe = "0.23.0"
+eframe = { version = "0.23.0", features = ["glow", "default_fonts"] }
 log = "0.4"
 web-time = "0.2.2"
 egui_plot = "0.23.0"
